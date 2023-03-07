@@ -1,0 +1,134 @@
+CREATE TABLE famous_persons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT,
+    last_name TEXT,
+    age TEXT);
+    
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Johnny", "Deep", "52");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Angelina", "Jolie", "41");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Brad", "Pitt", "53");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Kim", "Kardashian", "36");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Kanye", "West", "39");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("John", "Lennon", "dead");
+INSERT INTO famous_persons (first_name, last_name, age) VALUES ("Yoko", "Ono", "83");
+
+CREATE table works (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    work_name TEXT);
+
+INSERT INTO works (person_id, work_name)
+VALUES (1, "actor");
+INSERT INTO works (person_id, work_name)
+VALUES (1, "singer");
+INSERT INTO works (person_id, work_name)
+VALUES (2, "actor");
+INSERT INTO works (person_id, work_name)
+VALUES (2, "model");
+INSERT INTO works (person_id, work_name)
+VALUES (2, "producer");
+INSERT INTO works (person_id, work_name)
+VALUES (3, "actor");
+INSERT INTO works (person_id, work_name)
+VALUES (3, "producer");
+INSERT INTO works (person_id, work_name)
+VALUES (4, "celebrity");
+INSERT INTO works (person_id, work_name)
+VALUES (4, "model");
+INSERT INTO works (person_id, work_name)
+VALUES (4, "actor");
+INSERT INTO works (person_id, work_name)
+VALUES (5, "singer");
+INSERT INTO works (person_id, work_name)
+VALUES (5, "producer");
+INSERT INTO works (person_id, work_name)
+VALUES (6, "musician");
+INSERT INTO works (person_id, work_name)
+VALUES (6, "actor");
+INSERT INTO works (person_id, work_name)
+VALUES (6, "writer");
+INSERT INTO works (person_id, work_name)
+VALUES (7, "artist");
+INSERT INTO works (person_id, work_name)
+VALUES (7, "singer");
+
+CREATE TABLE relationships (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person1_id INTEGER,
+    person2_id INTEGER);
+
+INSERT INTO relationships (person1_id, person2_id)
+VALUES (1, NULL);
+INSERT INTO relationships (person1_id, person2_id)
+VALUES (2, 3);
+INSERT INTO relationships (person1_id, person2_id)
+VALUES (4, 5);
+INSERT INTO relationships (person1_id, person2_id)
+VALUES (6, 7);
+
+CREATE TABLE hobbies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    person_id INTEGER,
+    hobby_name TEXT);
+    
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (1, "music");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (1, "reading");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (1, "art");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (1, "shopping");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (2, "martial arts");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (2, "reading");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (2, "travelling");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (2, "shopping");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (3, "art");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (3, "swimming");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (3, "tenis");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (3, "travelling");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (3, "motorcycles");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (4, "singing");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (5, "art");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (5, "fashion");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (5, "basketball");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (5, "video games");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (5, "clubbing");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (6, "reading");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (6, "watching movies");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (7, "chess");
+INSERT INTO hobbies (person_id, hobby_name)
+VALUES (7, "art");
+
+SELECT famous_persons.last_name AS "Last Name", hobbies.hobby_name AS "Hobby" FROM hobbies
+JOIN famous_persons
+ON famous_persons.id = hobbies.person_id
+ORDER BY hobby_name;
+
+SELECT a.first_name AS "Partner 1", b.first_name AS "Partner 2" FROM relationships
+JOIN famous_persons a
+ON relationships.person1_id = a.id
+JOIN famous_persons b
+ON relationships.person2_id = b.id;
+
+SELECT famous_persons.first_name, works.work_name FROM famous_persons
+JOIN works
+ON famous_persons.id = works.person_id;
